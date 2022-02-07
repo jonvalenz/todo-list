@@ -1,0 +1,12 @@
+<div>
+  <input type="text" #newTask placeholder="Add a task!"/><button (click)="addTask(newTask.value)">Add</button>
+</div>
+<div *ngIf="taskList">
+  <ul>
+    <li *ngFor="let task of taskList">
+      <app-task [task]="task"></app-task>
+    </li>
+  </ul>
+</div>
+
+

@@ -1,0 +1,5 @@
+<div *ngIf="categories">
+  <div *ngFor="let category of categories">
+    <app-list [category]="category"></app-list>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="text" matInput placeholder="Ex. pat@example.com" />
+
+    <mat-error *ngIf="formControl.hasError('required')">
+      Category is required
+    </mat-error>
+  </mat-form-field>
+</form>
+
+<app-list [category]="category"></app-list>
