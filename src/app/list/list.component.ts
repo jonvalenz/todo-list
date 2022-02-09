@@ -1,13 +1,8 @@
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  CdkDropList,
-} from '@angular/cdk/drag-drop';
 import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from '../list-service';
 import { Category } from 'src/models/category';
 import { Task } from 'src/models/task';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 
@@ -56,20 +51,16 @@ export class ListComponent implements OnInit {
     this.tasks.splice(this.tasks.indexOf(task), 1);
   }
 
-  drop(event: CdkDragDrop<Task[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-  }
-
   onKeypress(keyboardEvent: KeyboardEvent) {
     if (keyboardEvent.key === 'Enter') this.addTask();
   }
 
   filterOngoingTasks(tasks: Task[]) {
-    return tasks.filter((task) => !task.done).slice();
+    return tasks.filter((task) => !task.done);
   }
 
   filterDoneTasks(tasks: Task[]) {
-    return tasks.filter((task) => task.done).slice();
+    return tasks.filter((task) => task.done);
   }
 
   updateTaskList() {
