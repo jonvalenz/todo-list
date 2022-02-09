@@ -1,0 +1,21 @@
+.categories-holder {
+  margin-left: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+.category {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  margin: 0.33em;
+}
+
+.new-category-button{
+  width:98%;
+  background-color: blanchedalmond;
+  border-radius: 1em;
+  order: -1;
+  padding: 1em 1em;
+  margin: 1em 1em 1em 1em;
+}

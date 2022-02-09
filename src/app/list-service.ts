@@ -17,6 +17,7 @@ export class ListService {
 
   deleteCategory(category: Category) {
     this.categories.splice(this.categories.indexOf(category), 1);
+    this.tasks = this.tasks.filter(task => task.category?.id != category.id)
   }
 
   addCategory(name: string) {
@@ -30,8 +31,9 @@ export class ListService {
     });
   }
 
-  addTask(taskName: string) {
-    this.tasks.push({ name: taskName, done: false, id: Date.now() });
+  addTask(task: Task) {
+    console.log(`pushing task ${task.category?.id}`);
+    this.tasks.push({ name: task.name, done: false, id: Date.now(), category:task.category });
   }
 
   markTaskAsDone(task: Task) {

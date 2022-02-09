@@ -1,5 +1,16 @@
 <div *ngIf="task">
-  <span><input type="checkbox" [checked]="task.done" /></span>
+  <mat-form-field>
+    <mat-checkbox
+      class="task-checkbox"
+      matPrefix
+      [(ngModel)]="task.done"
+    ></mat-checkbox>
+    <input matInput #newTask [(ngModel)]="task.name" />
+    <button mat-icon-button matSuffix (click)="delete()">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </mat-form-field>
+  <!-- <span><input type="checkbox" [checked]="task.done" /></span>
   <span>{{ task.name }}</span>
-  <span><button (click)="delete(task)">Delete</button></span>
+  <span><button mat-icon-button (click)="delete()"><mat-icon>remove</mat-icon></button></span> -->
 </div>

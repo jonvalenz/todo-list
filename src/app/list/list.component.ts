@@ -13,18 +13,32 @@ export class ListComponent implements OnInit {
   constructor(public listService: ListService) {}
 
   taskList?: Task[];
+  newTaskName:string = '';
   @Input() category?: Category;
 
   addTask(name: string) {
-    this.listService.addTask(name);
+    console.log(`adding ${name})`);
+    this.listService.addTask({ name, category: this.category });
+    this.updateTaskList();
+    this.newTaskName = '';
   }
 
-  //task service function insert here
-  ngOnInit(): void {
+  deleteTask(task:Task) {
+    console.log(`deleteing ${task.name}`)
+    this.listService.deleteTask(task);
+    this.updateTaskList();
+  }
+
+  updateTaskList() {
     console.log(`gettings tasks for ${this.category?.id}`);
     this.taskList =
       this.category?.name != undefined
         ? this.listService.getTasks(this.category)
         : undefined;
+  }
+
+  //task service function insert here
+  ngOnInit(): void {
+    this.updateTaskList();
   }
 }

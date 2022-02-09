@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Category } from 'src/models/category';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -10,8 +9,12 @@ import { FormControl } from '@angular/forms';
 export class CategoryComponent implements OnInit {
   constructor() {}
 
-  formControl: FormControl = new FormControl();
-  @Input() category?: Category;
+  @Input() category: Category = { name: '', id: 0 };
+  @Output() deleteCategory = new EventEmitter<Category>();
+
+  delete() {
+    this.deleteCategory?.emit(this.category);
+  }
 
   ngOnInit(): void {}
 }

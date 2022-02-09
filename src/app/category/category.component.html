@@ -1,12 +1,23 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Email</mat-label>
-    <input type="text" matInput placeholder="Ex. pat@example.com" />
+<div *ngIf="category">
+  <mat-card>
+    <mat-card-header class="category-name">
+      <mat-card-title>
+        <input matInput placeholder="New Category" [(ngModel)]="category.name" fullwidth />
+      </mat-card-title>
+    </mat-card-header>
 
-    <mat-error *ngIf="formControl.hasError('required')">
-      Category is required
-    </mat-error>
-  </mat-form-field>
-</form>
-
-<app-list [category]="category"></app-list>
+    <!-- <span>
+    <button mat-icon-button color="warn" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </span> -->
+    <mat-card-content>
+      <app-list [category]="category"></app-list>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-icon-button matSuffix (click)="delete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

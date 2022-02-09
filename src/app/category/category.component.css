@@ -1,0 +1,7 @@
+.category-name {
+  text-align: left;
+}
+
+.category-name:hover {
+  background-color:rgb(230, 230, 230);
+}
