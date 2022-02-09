@@ -1,20 +1,38 @@
-<mat-list #shoes>
-  <mat-list-item *ngFor="let task of taskList">
+<mat-list class="task-list">
+  <mat-list-item
+    class="task-list-item"
+    *ngFor="let task of filterOngoingTasks(tasks)"
+    [class.task-list-item-done]="task.done"
+  >
     <app-task (deleteTask)="deleteTask($event)" [task]="task"></app-task>
   </mat-list-item>
 </mat-list>
 
-<mat-form-field class="new-task-field">
-  
-    <input matInput #newTask placeholder="Add a task!" [(ngModel)]="newTaskName">
-  
-  
-    <button mat-icon-button matSuffix  (click)="addTask(newTask.value)">
+<mat-list>
+  <mat-list-item
+    class="task-list-item"
+    *ngFor="let task of filterDoneTasks(tasks)"
+    [class.task-list-item-done]="task.done"
+  >
+    <app-task (deleteTask)="deleteTask($event)" [task]="task"></app-task>
+  </mat-list-item>
+</mat-list>
+<form [formGroup]="listForm" #formDirective="ngForm">
+  <mat-form-field class="new-task-field">
+    <input
+      matInput
+      #newTask
+      [formControl]="requriedFormControl"
+      (keydown)="onKeypress($event)"
+      placeholder="Add a task!"
+      [(ngModel)]="newTaskName"
+      (focusout)="resetValidator()"
+    />
+    <mat-error *ngIf="showError">
+      Task name is <strong>required</strong>
+    </mat-error>
+    <button mat-icon-button matSuffix (click)="addTask()">
       <mat-icon>note_add</mat-icon>
     </button>
-  
-</mat-form-field>
-
-<!-- <div>
-  <input type="text" #newTask placeholder="Add a task!"/><button (click)="addTask(newTask.value)">Add</button>
-</div> -->
+  </mat-form-field>
+</form>

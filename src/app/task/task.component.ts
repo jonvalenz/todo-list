@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/models/task';
-
 import { ListService } from '../list-service';
 
 @Component({
@@ -11,12 +10,16 @@ import { ListService } from '../list-service';
 export class TaskComponent implements OnInit {
   constructor(private listService: ListService) {}
 
-  @Input() task?: Task;
+  @Input() task: Task = new Task();
   @Output() deleteTask = new EventEmitter<Task>();
+  @Output() toggleTask = new EventEmitter<Task>();
 
   delete() {
-    console.log('emititng evnet');
     this.deleteTask.emit(this.task);
+  }
+
+  finish() {
+    this.toggleTask.emit(this.task);
   }
 
   ngOnInit(): void {}

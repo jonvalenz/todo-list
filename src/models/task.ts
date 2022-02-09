@@ -5,5 +5,8 @@ export class Task {
   name?: string;
   id?:number;
   category?:Category;
-  constructor() {}
+  constructor() {
+    this.done = false;
+    this.name = '';
+  }
 }

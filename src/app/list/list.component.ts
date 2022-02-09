@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Task } from 'src/models/task';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
+import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from '../list-service';
 import { Category } from 'src/models/category';
-import { Input } from '@angular/core';
+import { Task } from 'src/models/task';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ViewChild } from '@angular/core';
+import { FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -10,34 +17,66 @@ import { Input } from '@angular/core';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  constructor(public listService: ListService) {}
-
-  taskList?: Task[];
-  newTaskName:string = '';
+  requriedFormControl = new FormControl('', [Validators.required]);
+  tasks: Task[] = [];
+  newTaskName: string = '';
+  showError: boolean = true;
   @Input() category?: Category;
 
-  addTask(name: string) {
-    console.log(`adding ${name})`);
-    this.listService.addTask({ name, category: this.category });
-    this.updateTaskList();
+  listForm: FormGroup;
+  @ViewChild(FormGroupDirective, { static: false })
+  formDirective!: FormGroupDirective;
+
+  constructor(public listService: ListService) {
+    this.listForm = new FormGroup({});
+  }
+  addTask() {
+    if (this.requriedFormControl.errors) {
+      this.showError = true;
+      return;
+    }
+    const newTask = this.listService.addTask({
+      name: this.newTaskName,
+      category: this.category,
+    });
+    this.tasks.push(newTask);
     this.newTaskName = '';
+    this.resetValidator();
   }
 
-  deleteTask(task:Task) {
-    console.log(`deleteing ${task.name}`)
+  resetValidator() {
+    this.showError = false;
+    this.formDirective.resetForm();
+    this.requriedFormControl.markAsPristine();
+    this.requriedFormControl.markAsUntouched();
+  }
+
+  deleteTask(task: Task) {
     this.listService.deleteTask(task);
-    this.updateTaskList();
+    this.tasks.splice(this.tasks.indexOf(task), 1);
+  }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
+
+  onKeypress(keyboardEvent: KeyboardEvent) {
+    if (keyboardEvent.key === 'Enter') this.addTask();
+  }
+
+  filterOngoingTasks(tasks: Task[]) {
+    return tasks.filter((task) => !task.done).slice();
+  }
+
+  filterDoneTasks(tasks: Task[]) {
+    return tasks.filter((task) => task.done).slice();
   }
 
   updateTaskList() {
-    console.log(`gettings tasks for ${this.category?.id}`);
-    this.taskList =
-      this.category?.name != undefined
-        ? this.listService.getTasks(this.category)
-        : undefined;
+    if (this.category != undefined) {
+      this.tasks = this.listService.getTasks(this.category);
+    }
   }
-
-  //task service function insert here
   ngOnInit(): void {
     this.updateTaskList();
   }

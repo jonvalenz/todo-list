@@ -17,7 +17,7 @@ export class ListService {
 
   deleteCategory(category: Category) {
     this.categories.splice(this.categories.indexOf(category), 1);
-    this.tasks = this.tasks.filter(task => task.category?.id != category.id)
+    this.tasks = this.tasks.filter((task) => task.category?.id != category.id);
   }
 
   addCategory(name: string) {
@@ -26,14 +26,20 @@ export class ListService {
 
   getTasks(category: Category) {
     return this.tasks.filter((task) => {
-      console.log(`${task.category?.id} === ${category.id}`)
       return task.category?.id === category.id;
     });
   }
 
   addTask(task: Task) {
-    console.log(`pushing task ${task.category?.id}`);
-    this.tasks.push({ name: task.name, done: false, id: Date.now(), category:task.category });
+    const newTask = {
+      name: task.name,
+      done: false,
+      id: Date.now(),
+      category: task.category,
+    };
+    this.tasks.push(newTask);
+
+    return newTask;
   }
 
   markTaskAsDone(task: Task) {

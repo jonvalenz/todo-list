@@ -2,17 +2,8 @@
   <div>New Category</div>
   <mat-icon>add</mat-icon>
 </button>
-<div
-  cdkDropList
-  (cdkDropListDropped)="drop($event)"
-  class="categories-holder"
-  *ngIf="categories"
->
-  <div
-    cdkDrag
-    class="category"
-    *ngFor="let category of categories.slice().reverse()"
-  >
+<div class="categories-holder" *ngIf="categories">
+  <div class="category" *ngFor="let category of categories.slice().reverse()">
     <app-category
       (deleteCategory)="deleteCategory($event)"
       [category]="category"

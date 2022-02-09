@@ -21,17 +21,12 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteCategory(category: Category) {
-    console.log(`deleteing ${category.name}`);
     this.listService.deleteCategory(category);
     this.updateCategories();
   }
 
   updateCategories() {
     this.categories = this.listService.getCategories();
-  }
-  drop(event: CdkDragDrop<Category[]>) {
-    if (this.categories)
-      moveItemInArray(this.categories, event.previousIndex, event.currentIndex);
   }
 
   ngOnInit(): void {

@@ -1,19 +1,22 @@
 <div *ngIf="category">
   <mat-card>
-    <mat-card-header class="category-name">
+    <mat-card-header>
       <mat-card-title>
-        <input matInput placeholder="New Category" [(ngModel)]="category.name" fullwidth />
+        <input
+          class="category-name"
+          matInput
+          placeholder="New Category"
+          [(ngModel)]="category.name"
+          fullwidth
+        />
       </mat-card-title>
     </mat-card-header>
+    <div class="category-content">
+      <mat-card-content>
+        <app-list [category]="category"></app-list>
+      </mat-card-content>
+    </div>
 
-    <!-- <span>
-    <button mat-icon-button color="warn" (click)="delete()">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </span> -->
-    <mat-card-content>
-      <app-list [category]="category"></app-list>
-    </mat-card-content>
     <mat-card-actions align="end">
       <button mat-icon-button matSuffix (click)="delete()">
         <mat-icon>delete</mat-icon>
