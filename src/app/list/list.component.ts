@@ -57,14 +57,15 @@ export class ListComponent implements OnInit {
   deleteTask(task: Task) {
     this.listService.deleteTask(task);
     this.tasks.splice(this.tasks.indexOf(task), 1);
+    this.refreshOngoingTasks();
   }
 
   onKeypress(keyboardEvent: KeyboardEvent) {
     if (keyboardEvent.key === 'Enter') this.addTask();
   }
 
-  refreshOngoingTasks(): Task[] {
-    return (this.ongoingTasks = this.tasks.filter((task) => !task.status));
+  refreshOngoingTasks() {
+    this.ongoingTasks = this.tasks.filter((task) => !task.status);
   }
 
   getDoneTasks(): Task[] {
