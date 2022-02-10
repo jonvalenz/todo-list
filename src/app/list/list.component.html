@@ -1,27 +1,40 @@
-<mat-list class="task-list">
+<mat-list
+  cdkDropList
+  (cdkDropListDropped)="dropOngoingTasks($event)"
+  #todoList="cdkDropList"
+  class="task-list"
+>
   <mat-list-item
     class="task-list-item"
-    *ngFor="let task of filterOngoingTasks(tasks)"
-    [class.task-list-item-done]="task.done"
+    *ngFor="let task of ongoingTasks"
+    [class.task-list-item-done]="task.status"
+    cdkDrag
   >
-    <app-task (deleteTask)="deleteTask($event)" [task]="task"></app-task>
+    <app-task
+      (toggleTask)="updateTaskStatus($event)"
+      (deleteTask)="deleteTask($event)"
+      [task]="task"
+    ></app-task>
   </mat-list-item>
 </mat-list>
 
 <mat-list>
   <mat-list-item
     class="task-list-item"
-    *ngFor="let task of filterDoneTasks(tasks)"
-    [class.task-list-item-done]="task.done"
+    *ngFor="let task of getDoneTasks()"
+    [class.task-list-item-done]="task.status"
   >
-    <app-task (deleteTask)="deleteTask($event)" [task]="task"></app-task>
+    <app-task
+      (toggleTask)="updateTaskStatus($event)"
+      (deleteTask)="deleteTask($event)"
+      [task]="task"
+    ></app-task>
   </mat-list-item>
 </mat-list>
 <form [formGroup]="listForm" #formDirective="ngForm">
   <mat-form-field class="new-task-field">
     <input
       matInput
-      #newTask
       [formControl]="requriedFormControl"
       (keydown)="onKeypress($event)"
       placeholder="Add a task!"

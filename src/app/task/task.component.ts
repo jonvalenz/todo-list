@@ -18,7 +18,7 @@ export class TaskComponent implements OnInit {
     this.deleteTask.emit(this.task);
   }
 
-  finish() {
+  toggle() {
     this.toggleTask.emit(this.task);
   }
 

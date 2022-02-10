@@ -1,10 +1,10 @@
 <div *ngIf="task">
   <mat-form-field>
-    <mat-checkbox class="task-checkbox" matPrefix [(ngModel)]="task.done">
+    <mat-checkbox (change)="toggle()" class="task-checkbox" matPrefix [(ngModel)]="task.status">
     </mat-checkbox>
     <input
       class="task-item"
-      [class.done-task-item]="task.done"
+      [class.done-task-item]="task.status"
       matInput
       [(ngModel)]="task.name"
     />

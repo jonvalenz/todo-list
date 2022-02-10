@@ -1,12 +1,12 @@
 import { Category } from './category';
 
 export class Task {
-  done?: boolean;
+  status?: boolean;
   name?: string;
   id?:number;
   category?:Category;
   constructor() {
-    this.done = false;
+    this.status = false;
     this.name = '';
   }
 }

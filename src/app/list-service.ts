@@ -43,11 +43,11 @@ export class ListService {
   }
 
   markTaskAsDone(task: Task) {
-    this.tasks[this.tasks.indexOf(task)].done = true;
+    this.tasks[this.tasks.indexOf(task)].status = true;
   }
 
   markTaskAsNotDone(task: Task) {
-    this.tasks[this.tasks.indexOf(task)].done = false;
+    this.tasks[this.tasks.indexOf(task)].status = false;
   }
 
   deleteTask(task: Task) {

@@ -5,6 +5,11 @@ import { Task } from 'src/models/task';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
@@ -14,6 +19,7 @@ import { FormGroupDirective } from '@angular/forms';
 export class ListComponent implements OnInit {
   requriedFormControl = new FormControl('', [Validators.required]);
   tasks: Task[] = [];
+  ongoingTasks: Task[] = [];
   newTaskName: string = '';
   showError: boolean = true;
   @Input() category?: Category;
@@ -35,6 +41,8 @@ export class ListComponent implements OnInit {
       category: this.category,
     });
     this.tasks.push(newTask);
+    this.refreshOngoingTasks();
+
     this.newTaskName = '';
     this.resetValidator();
   }
@@ -55,12 +63,16 @@ export class ListComponent implements OnInit {
     if (keyboardEvent.key === 'Enter') this.addTask();
   }
 
-  filterOngoingTasks(tasks: Task[]) {
-    return tasks.filter((task) => !task.done);
+  refreshOngoingTasks(): Task[] {
+    return (this.ongoingTasks = this.tasks.filter((task) => !task.status));
   }
 
-  filterDoneTasks(tasks: Task[]) {
-    return tasks.filter((task) => task.done);
+  getDoneTasks(): Task[] {
+    return this.tasks.filter((task) => task.status);
+  }
+
+  dropOngoingTasks(event: CdkDragDrop<Task[]>) {
+    moveItemInArray(this.ongoingTasks, event.previousIndex, event.currentIndex);
   }
 
   updateTaskList() {
@@ -68,7 +80,15 @@ export class ListComponent implements OnInit {
       this.tasks = this.listService.getTasks(this.category);
     }
   }
+
+  updateTaskStatus(task: Task) {
+    this.tasks.find((taskElement) => taskElement.id === task.id)!.status =
+      task.status;
+    this.refreshOngoingTasks();
+  }
+
   ngOnInit(): void {
     this.updateTaskList();
+    this.refreshOngoingTasks();
   }
 }
