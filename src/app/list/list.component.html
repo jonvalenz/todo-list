@@ -6,7 +6,6 @@
   <mat-list-item
     class="task-list-item"
     *ngFor="let task of ongoingTasks"
-    [class.task-list-item-done]="task.status"
     cdkDrag
   >
     <app-task
@@ -18,11 +17,7 @@
 </mat-list>
 
 <mat-list>
-  <mat-list-item
-    class="task-list-item"
-    *ngFor="let task of getDoneTasks()"
-    [class.task-list-item-done]="task.status"
-  >
+  <mat-list-item class="task-list-item" *ngFor="let task of getDoneTasks()">
     <app-task
       (toggleTask)="updateTaskStatus($event)"
       (deleteTask)="deleteTask($event)"
