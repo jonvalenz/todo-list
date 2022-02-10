@@ -1,5 +1,4 @@
 import { Task } from 'src/models/task';
-import { Category } from 'src/models/category';
 
 export const sampleTasks: Task[] = [
   {
