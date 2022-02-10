@@ -8,8 +8,7 @@ import { FormGroupDirective } from '@angular/forms';
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+  } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
