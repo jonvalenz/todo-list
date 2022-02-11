@@ -48,12 +48,13 @@ export class ListService {
     });
   }
 
-  addTask(name: string, categoryID: string) {
+  addTask(name: string, categoryID: string, order:number) {
     const newTask: Task = {
       name,
       status: false,
       id: uuidv4(),
       categoryID: categoryID,
+      order
     };
     tasks.push(newTask);
 

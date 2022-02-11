@@ -3,4 +3,5 @@ export interface ITask {
   name?: string;
   id?: string;
   categoryID?: string;
+  order?:number;
 }

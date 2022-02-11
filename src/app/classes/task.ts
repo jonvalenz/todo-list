@@ -5,10 +5,12 @@ export class Task implements ITask {
   name?: string;
   id: string;
   categoryID: string;
+  order: number;
   constructor() {
     this.status = false;
     this.name = '';
     this.id = '0';
     this.categoryID = '0';
+    this.order = 0;
   }
 }

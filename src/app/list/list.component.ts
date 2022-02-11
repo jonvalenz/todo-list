@@ -36,6 +36,7 @@ export class ListComponent implements OnInit {
     const newTask = this.listService.addTask(
       this.newTaskName,
       this.category.id,
+      this.tasks.length,
     );
     this.tasks.push(newTask);
 
@@ -65,11 +66,25 @@ export class ListComponent implements OnInit {
 
   dropTasks(event: CdkDragDrop<Task[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    let i = 0;
+    event.container.data.forEach((task) => {
+      task.order = i;
+      i = i + 1;
+      this.listService.updateTask(task);
+    });
   }
 
   updateTaskList() {
     if (this.category != undefined) {
-      this.tasks = this.listService.getTasks(this.category);
+      this.tasks = this.listService
+        .getTasks(this.category)
+        .sort((taskA, taskB) => {
+          if (taskA.order > taskB.order) return 1;
+
+          if (taskA.order < taskB.order) return -1;
+
+          return 0;
+        });
     }
   }
 

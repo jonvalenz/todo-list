@@ -1,6 +1,7 @@
 <mat-list
   cdkDropList
   (cdkDropListDropped)="dropTasks($event)"
+  [cdkDropListData]="tasks"
   class="task-list"
 >
   <mat-list-item class="task-list-item" *ngFor="let task of tasks" cdkDrag>
