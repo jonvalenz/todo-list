@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from 'src/models/task';
-import { sampleTasks } from './constants/sample-tasks';
-import { sampleCategories } from './constants/sample-categories';
+import { sampleTasks } from '../constants/sample-tasks';
+import { sampleCategories } from '../constants/sample-categories';
 import { Category } from 'src/models/category';
 
 @Injectable({

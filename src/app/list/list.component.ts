@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ListService } from '../list-service';
+import { ListService } from '../list-service/list-service';
 import { Category } from 'src/models/category';
 import { Task } from 'src/models/task';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
