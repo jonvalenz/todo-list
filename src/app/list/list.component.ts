@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Key } from '../constants/keyboard-keys';
 
 @Component({
   selector: 'app-list',
@@ -57,7 +58,7 @@ export class ListComponent implements OnInit {
   }
 
   onKeypress(keyboardEvent: KeyboardEvent) {
-    if (keyboardEvent.key === 'Enter') this.addTask();
+    if (keyboardEvent.key === Key.Enter) this.addTask();
   }
 
   getDoneTasks(): Task[] {
