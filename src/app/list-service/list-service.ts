@@ -20,7 +20,7 @@ export class ListService {
   deleteCategory(category: Category) {
     categories.splice(categories.indexOf(category), 1);
     const tasksToRemove = tasks.filter(
-      (task) => task.categoryID != category.id,
+      (task) => task.categoryID === category.id,
     );
 
     tasksToRemove.forEach((task) => {
