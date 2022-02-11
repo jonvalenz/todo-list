@@ -5,10 +5,7 @@ import { Task } from 'src/models/task';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
@@ -16,16 +13,16 @@ import {
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  requriedFormControl = new FormControl('', [Validators.required]);
-  tasks: Task[] = [];
-  ongoingTasks: Task[] = [];
-  newTaskName: string = '';
-  showError: boolean = true;
   @Input() category?: Category;
-
-  listForm: FormGroup;
   @ViewChild(FormGroupDirective, { static: false })
   formDirective!: FormGroupDirective;
+
+  requriedFormControl = new FormControl('', [Validators.required]);
+  tasks: Task[] = [];
+  newTaskName: string = '';
+  showError: boolean = true;
+
+  listForm: FormGroup;
 
   constructor(public listService: ListService) {
     this.listForm = new FormGroup({});
@@ -40,7 +37,6 @@ export class ListComponent implements OnInit {
       category: this.category,
     });
     this.tasks.push(newTask);
-    this.refreshOngoingTasks();
 
     this.newTaskName = '';
     this.resetValidator();
@@ -56,23 +52,18 @@ export class ListComponent implements OnInit {
   deleteTask(task: Task) {
     this.listService.deleteTask(task);
     this.tasks.splice(this.tasks.indexOf(task), 1);
-    this.refreshOngoingTasks();
   }
 
   onKeypress(keyboardEvent: KeyboardEvent) {
     if (keyboardEvent.key === 'Enter') this.addTask();
   }
 
-  refreshOngoingTasks() {
-    this.ongoingTasks = this.tasks.filter((task) => !task.status);
-  }
-
   getDoneTasks(): Task[] {
     return this.tasks.filter((task) => task.status);
   }
 
-  dropOngoingTasks(event: CdkDragDrop<Task[]>) {
-    moveItemInArray(this.ongoingTasks, event.previousIndex, event.currentIndex);
+  dropTasks(event: CdkDragDrop<Task[]>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
   updateTaskList() {
@@ -84,11 +75,9 @@ export class ListComponent implements OnInit {
   updateTaskStatus(task: Task) {
     this.tasks.find((taskElement) => taskElement.id === task.id)!.status =
       task.status;
-    this.refreshOngoingTasks();
   }
 
   ngOnInit(): void {
     this.updateTaskList();
-    this.refreshOngoingTasks();
   }
 }
