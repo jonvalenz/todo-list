@@ -6,6 +6,7 @@
   <div class="category" *ngFor="let category of categories.slice().reverse()">
     <app-category
       (deleteCategory)="deleteCategory($event)"
+      (renameCategory)="updateCategory($event)"
       [category]="category"
     ></app-category>
   </div>

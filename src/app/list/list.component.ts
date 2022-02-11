@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  @Input() category?: Category;
+  @Input() category!: Category;
 
   @ViewChild(FormGroupDirective, { static: false })
   formDirective!: FormGroupDirective;
@@ -33,10 +33,10 @@ export class ListComponent implements OnInit {
       this.showError = true;
       return;
     }
-    const newTask = this.listService.addTask({
-      name: this.newTaskName,
-      categoryID: this.category?.id,
-    });
+    const newTask = this.listService.addTask(
+      this.newTaskName,
+      this.category.id,
+    );
     this.tasks.push(newTask);
 
     this.newTaskName = '';

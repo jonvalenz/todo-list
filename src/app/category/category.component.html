@@ -8,6 +8,7 @@
           placeholder="New Category"
           [(ngModel)]="category.name"
           fullwidth
+          (focusout)="rename()"
         />
       </mat-card-title>
     </mat-card-header>

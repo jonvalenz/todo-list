@@ -48,12 +48,12 @@ export class ListService {
     });
   }
 
-  addTask(task: ITask) {
-    const newTask = {
-      name: task.name,
-      done: false,
+  addTask(name: string, categoryID: string) {
+    const newTask: Task = {
+      name,
+      status: false,
       id: uuidv4(),
-      category: task.categoryID,
+      categoryID: categoryID,
     };
     tasks.push(newTask);
 
@@ -62,7 +62,9 @@ export class ListService {
 
   deleteTask(task: Task) {
     tasks.splice(tasks.indexOf(task), 1);
-    categories.find((category) => category.tasks?.includes(task.id));
+
+    const taskCategory = categories.find(category => category.id === task.categoryID);
+    taskCategory?.tasks?.splice(taskCategory.tasks.indexOf(task.categoryID),1);
   }
 
   constructor() {}
