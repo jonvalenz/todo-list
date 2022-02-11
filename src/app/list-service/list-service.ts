@@ -1,57 +1,68 @@
 import { Injectable } from '@angular/core';
-import { Task } from 'src/models/task';
-import { sampleTasks } from '../constants/sample-tasks';
-import { sampleCategories } from '../constants/sample-categories';
-import { Category } from 'src/models/category';
+import { Task } from 'src/app/classes/task';
+import { sampleTasks as tasks } from '../constants/sample-tasks';
+import { sampleCategories as categories } from '../constants/sample-categories';
+import { Category } from 'src/app/classes/category';
+import { v4 as uuidv4 } from 'uuid';
+import { ITask } from 'src/models/task';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
-  tasks: Task[] = sampleTasks;
-  categories: Category[] = sampleCategories;
+  // tasks: Task[] = sampleTasks;
+  // categories: Category[] = sampleCategories;
 
   getCategories() {
-    return sampleCategories;
+    return categories;
   }
 
   deleteCategory(category: Category) {
-    this.categories.splice(this.categories.indexOf(category), 1);
-    this.tasks = this.tasks.filter((task) => task.category?.id != category.id);
-  }
+    categories.splice(categories.indexOf(category), 1);
+    const tasksToRemove = tasks.filter(
+      (task) => task.categoryID != category.id,
+    );
 
-  addCategory(name: string) {
-    this.categories.push({ name, id: Date.now() });
-  }
-
-  getTasks(category: Category) {
-    return this.tasks.filter((task) => {
-      return task.category?.id === category.id;
+    tasksToRemove.forEach((task) => {
+      tasks.splice(tasks.indexOf(task), 1);
     });
   }
 
-  addTask(task: Task) {
+  updateCategory (category: Category){
+    categories[categories.indexOf(category)].name = category.name;
+    categories[categories.indexOf(category)].tasks = category.tasks;
+  }
+
+  updateTask (task: Task){
+    tasks[tasks.indexOf(task)].name = task.name;
+    tasks[tasks.indexOf(task)].status = task.status;
+  }
+
+  addCategory(name: string) {
+    categories.push({ name, id: uuidv4() });
+  }
+
+  getTasks(category: Category) {
+    return tasks.filter((task) => {
+      return task.categoryID === category.id;
+    });
+  }
+
+  addTask(task: ITask) {
     const newTask = {
       name: task.name,
       done: false,
-      id: Date.now(),
-      category: task.category,
+      id: uuidv4(),
+      category: task.categoryID,
     };
-    this.tasks.push(newTask);
+    tasks.push(newTask);
 
     return newTask;
   }
 
-  markTaskAsDone(task: Task) {
-    this.tasks[this.tasks.indexOf(task)].status = true;
-  }
-
-  markTaskAsNotDone(task: Task) {
-    this.tasks[this.tasks.indexOf(task)].status = false;
-  }
-
   deleteTask(task: Task) {
-    this.tasks.splice(this.tasks.indexOf(task), 1);
+    tasks.splice(tasks.indexOf(task), 1);
+    categories.find((category) => category.tasks?.includes(task.id));
   }
 
   constructor() {}

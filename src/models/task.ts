@@ -1,12 +1,6 @@
-import { Category } from './category';
-
-export class Task {
+export interface ITask {
   status?: boolean;
   name?: string;
-  id?:number;
-  category?:Category;
-  constructor() {
-    this.status = false;
-    this.name = '';
-  }
+  id?: string;
+  categoryID?: string;
 }

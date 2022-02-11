@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from '../list-service/list-service';
-import { Category } from 'src/models/category';
-import { Task } from 'src/models/task';
+import { Category } from 'src/app/classes/category';
+import { Task } from 'src/app/classes/task';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
@@ -14,6 +14,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class ListComponent implements OnInit {
   @Input() category?: Category;
+
   @ViewChild(FormGroupDirective, { static: false })
   formDirective!: FormGroupDirective;
 
@@ -34,7 +35,7 @@ export class ListComponent implements OnInit {
     }
     const newTask = this.listService.addTask({
       name: this.newTaskName,
-      category: this.category,
+      categoryID: this.category?.id,
     });
     this.tasks.push(newTask);
 
@@ -75,6 +76,13 @@ export class ListComponent implements OnInit {
   updateTaskStatus(task: Task) {
     this.tasks.find((taskElement) => taskElement.id === task.id)!.status =
       task.status;
+    this.listService.updateTask(task);
+  }
+
+  renameTask(task: Task) {
+    this.tasks.find((taskElement) => taskElement.id === task.id)!.name =
+      task.name;
+    this.listService.updateTask(task);
   }
 
   ngOnInit(): void {

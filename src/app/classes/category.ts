@@ -1,5 +1,6 @@
 export class Category {
   name: string = '';
-  id?: number;
+  id?: string;
+  tasks?: string []
   constructor() {}
 }

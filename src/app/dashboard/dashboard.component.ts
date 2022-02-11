@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/models/category';
+import { Category } from 'src/app/classes/category';
 import { ListService } from '../list-service/list-service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +21,10 @@ export class DashboardComponent implements OnInit {
   deleteCategory(category: Category) {
     this.listService.deleteCategory(category);
     this.updateCategories();
+  }
+
+  updateCategory(category: Category) {
+    this.listService.updateCategory(category);
   }
 
   updateCategories() {

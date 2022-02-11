@@ -7,6 +7,7 @@
     <app-task
       (toggleTask)="updateTaskStatus($event)"
       (deleteTask)="deleteTask($event)"
+      (renameTask)="renameTask($event)"
       [task]="task"
     ></app-task>
   </mat-list-item>

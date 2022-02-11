@@ -7,6 +7,7 @@
       [class.done-task-item]="task.status"
       matInput
       [(ngModel)]="task.name"
+      (focusout) ="rename()"
     />
     <button mat-icon-button matSuffix (click)="delete()">
       <mat-icon>remove</mat-icon>
