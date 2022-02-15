@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/models/category';
 import { ListService } from '../list-service/list-service';
+import { CategoryService } from '../category-service/category.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,18 +9,21 @@ import { ListService } from '../list-service/list-service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private listService: ListService) {}
+  constructor(
+    private listService: ListService,
+    private categoryService: CategoryService
+  ) {}
 
   categories?: ICategory[];
 
   addCategory(name: string) {
-    this.listService.addCategory(name);
+    this.categoryService.addCategory(name);
 
     this.updateCategories();
   }
 
   deleteCategory(category: ICategory) {
-    this.listService.deleteCategory(category);
+    this.categoryService.deleteCategory(category);
     this.updateCategories();
   }
 
@@ -28,7 +32,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateCategories() {
-    this.categories = this.listService.getCategories();
+    this.categories = this.categoryService.getCategories();
   }
 
   ngOnInit(): void {

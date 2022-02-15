@@ -12,21 +12,6 @@ export class ListService {
   // tasks: Task[] = sampleTasks;
   // categories: Category[] = sampleCategories;
 
-  getCategories() {
-    return categories;
-  }
-
-  deleteCategory(category: ICategory) {
-    categories.splice(categories.indexOf(category), 1);
-    const tasksToRemove = tasks.filter(
-      (task) => task.categoryID === category.id
-    );
-
-    tasksToRemove.forEach((task) => {
-      tasks.splice(tasks.indexOf(task), 1);
-    });
-  }
-
   updateCategory(category: ICategory) {
     categories[categories.indexOf(category)].name = category.name;
     categories[categories.indexOf(category)].tasks = category.tasks;
@@ -35,10 +20,6 @@ export class ListService {
   updateTask(task: ITask) {
     tasks[tasks.indexOf(task)].name = task.name;
     tasks[tasks.indexOf(task)].status = task.status;
-  }
-
-  addCategory(name: string) {
-    categories.push({ name, id: uuidv4() });
   }
 
   getTasks(category: ICategory) {
