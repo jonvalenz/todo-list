@@ -32,23 +32,12 @@
             "type": "attribute"
           }
         ],
-        "sort-imports": [
-          "error",
-          {
-            "ignoreCase": false,
-            "ignoreDeclarationSort": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-            "allowSeparatedGroups": false
-          }
-        ],
-        "rules": {
-          "linebreak-style": [0],
-          "no-empty-function": "off",
-          "@typescript-eslint/no-empty-function": [0],
-          "sort-imports": "off",
-          "@typescript-eslint/no-non-null-assertion": [0]
-        }
+
+        "linebreak-style": [0],
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": [0],
+        "sort-imports": "off",
+        "@typescript-eslint/no-non-null-assertion": [0]
       }
     },
     {
