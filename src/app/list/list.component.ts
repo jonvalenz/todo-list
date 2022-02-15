@@ -5,7 +5,7 @@ import { FormGroupDirective } from '@angular/forms';
 import { ICategory } from 'src/app/models/category';
 import { ITask } from 'src/app/models/task';
 import { Key } from '../constants/keyboard-keys';
-import { ListService } from '../list-service/list-service';
+import { ListService } from '../services/list-service/list-service';
 import { ViewChild } from '@angular/core';
 
 @Component({
