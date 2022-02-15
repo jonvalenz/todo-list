@@ -24,7 +24,7 @@ import { MatCardModule } from '@angular/material/card';
     TaskComponent,
     CategoryComponent,
     DashboardComponent,
-    IntroductionComponent,
+    IntroductionComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +38,9 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     MatCheckboxModule,
     MatCardModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

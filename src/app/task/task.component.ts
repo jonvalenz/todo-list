@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITask } from 'src/app/models/task';
 import { ListService } from '../list-service/list-service';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.css'],
+  styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
   constructor(private listService: ListService) {}

@@ -6,7 +6,7 @@ import { ICategory } from 'src/app/models/category';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ListService {
   // tasks: Task[] = sampleTasks;
@@ -19,7 +19,7 @@ export class ListService {
   deleteCategory(category: ICategory) {
     categories.splice(categories.indexOf(category), 1);
     const tasksToRemove = tasks.filter(
-      (task) => task.categoryID === category.id,
+      (task) => task.categoryID === category.id
     );
 
     tasksToRemove.forEach((task) => {
@@ -53,7 +53,7 @@ export class ListService {
       status: false,
       id: uuidv4(),
       categoryID: categoryID,
-      order,
+      order
     };
     tasks.push(newTask);
 
@@ -64,11 +64,11 @@ export class ListService {
     tasks.splice(tasks.indexOf(task), 1);
 
     const taskCategory = categories.find(
-      (category) => category.id === task.categoryID,
+      (category) => category.id === task.categoryID
     );
     taskCategory?.tasks?.splice(
       taskCategory.tasks.indexOf(task.categoryID!),
-      1,
+      1
     );
   }
 

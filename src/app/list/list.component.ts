@@ -1,17 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ListService } from '../list-service/list-service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroupDirective } from '@angular/forms';
 import { ICategory } from 'src/app/models/category';
 import { ITask } from 'src/app/models/task';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ViewChild } from '@angular/core';
-import { FormGroupDirective } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Key } from '../constants/keyboard-keys';
+import { ListService } from '../list-service/list-service';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
   @Input() category!: ICategory;
@@ -21,15 +21,15 @@ export class ListComponent implements OnInit {
 
   requriedFormControl = new FormControl('', [Validators.required]);
   tasks: ITask[] = [];
-  newTaskName: string = '';
-  showError: boolean = true;
+  newTaskName = '';
+  showError = true;
 
   listForm: FormGroup;
 
   constructor(public listService: ListService) {
     this.listForm = new FormGroup({});
   }
-  
+
   addTask() {
     if (this.requriedFormControl.errors) {
       this.showError = true;
@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
     const newTask = this.listService.addTask(
       this.newTaskName,
       this.category.id,
-      this.tasks.length,
+      this.tasks.length
     );
     this.tasks.push(newTask);
 

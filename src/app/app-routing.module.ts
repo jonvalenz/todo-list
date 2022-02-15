@@ -7,11 +7,11 @@ import { RoutePaths } from './constants/route-paths';
 const routes: Routes = [
   { path: '', redirectTo: RoutePaths.Introduction, pathMatch: 'full' },
   { path: RoutePaths.Introduction, component: IntroductionComponent },
-  { path: RoutePaths.Dashboard, component: DashboardComponent },
+  { path: RoutePaths.Dashboard, component: DashboardComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
