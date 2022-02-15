@@ -1,4 +1,4 @@
-import { ICategory } from 'src/app/models/category';
+import { ICategory } from 'src/app/core/interfaces/category';
 
 export const sampleCategories: ICategory[] = [
   { name: 'Sports', id: '10', tasks: ['1', '2'] },

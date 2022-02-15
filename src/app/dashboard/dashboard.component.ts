@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ICategory } from 'src/app/models/category';
-import { ListService } from '../services/list-service/list-service';
-import { CategoryService } from '../services/category-service/category.service';
+import { ICategory } from 'src/app/core/interfaces/category';
+import { ListService } from '../core/services/list-service/list-service';
+import { CategoryService } from '../core/services/category-service/category.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,4 +1,4 @@
-import { ITask } from 'src/app/models/task';
+import { ITask } from 'src/app/core/interfaces/task';
 
 export const sampleTasks: ITask[] = [
   {

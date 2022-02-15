@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { sampleCategories as categories } from '../../constants/sample-categories';
 import { sampleTasks as tasks } from '../../constants/sample-tasks';
-import { ICategory } from 'src/app/models/category';
+import { ICategory } from 'src/app/core/interfaces/category';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({

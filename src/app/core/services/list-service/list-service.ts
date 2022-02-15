@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ITask } from 'src/app/models/task';
+import { ITask } from 'src/app/core/interfaces/task';
 import { sampleTasks as tasks } from '../../constants/sample-tasks';
 import { sampleCategories as categories } from '../../constants/sample-categories';
-import { ICategory } from 'src/app/models/category';
+import { ICategory } from 'src/app/core/interfaces/category';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ICategory } from 'src/app/models/category';
+import { ICategory } from 'src/app/core/interfaces/category';
 
 @Component({
   selector: 'app-category',
