@@ -70,10 +70,9 @@ export class ListComponent implements OnInit {
 
   dropTasks(event: CdkDragDrop<ITask[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-    let i = 0;
-    event.container.data.forEach((task) => {
-      task.order = i;
-      i = i + 1;
+
+    event.container.data.forEach((task, index) => {
+      task.order = index;
       this.listService.updateTask(task);
     });
   }
