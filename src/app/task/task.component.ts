@@ -7,7 +7,7 @@ import { ListService } from '../list-service/list-service';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css'],
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   constructor(private listService: ListService) {}
 
   @Input() task: ITask = {};
@@ -26,6 +26,4 @@ export class TaskComponent implements OnInit {
   rename() {
     this.renameTask.emit(this.task);
   }
-
-  ngOnInit(): void {}
 }

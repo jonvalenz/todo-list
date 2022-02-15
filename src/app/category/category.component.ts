@@ -6,7 +6,7 @@ import { ICategory } from 'src/app/models/category';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent {
   constructor() {}
 
   @Input() category: ICategory = { name: '', id: '0' };
@@ -20,6 +20,4 @@ export class CategoryComponent implements OnInit {
   rename() {
     this.renameCategory.emit(this.category);
   }
-
-  ngOnInit(): void {}
 }

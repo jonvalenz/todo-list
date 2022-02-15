@@ -1,13 +1,18 @@
 <div *ngIf="task">
   <mat-form-field>
-    <mat-checkbox (change)="toggle()" class="task-checkbox" matPrefix [(ngModel)]="task.status">
+    <mat-checkbox
+      (change)="toggle()"
+      class="task-checkbox"
+      matPrefix
+      [(ngModel)]="task.status"
+    >
     </mat-checkbox>
     <input
       class="task-item"
       [class.done-task-item]="task.status"
       matInput
       [(ngModel)]="task.name"
-      (focusout) ="rename()"
+      (focusout)="rename()"
     />
     <button mat-icon-button matSuffix (click)="delete()">
       <mat-icon>remove</mat-icon>

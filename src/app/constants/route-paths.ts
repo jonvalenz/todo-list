@@ -1,5 +1,4 @@
 export const enum RoutePaths {
-    Introduction = 'intro',
-    Dashboard = 'dashboard'
+  Introduction = 'intro',
+  Dashboard = 'dashboard',
 }
-

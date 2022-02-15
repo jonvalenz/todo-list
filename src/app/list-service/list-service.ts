@@ -5,7 +5,6 @@ import { sampleCategories as categories } from '../constants/sample-categories';
 import { ICategory } from 'src/app/models/category';
 import { v4 as uuidv4 } from 'uuid';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -28,12 +27,12 @@ export class ListService {
     });
   }
 
-  updateCategory (category: ICategory){
+  updateCategory(category: ICategory) {
     categories[categories.indexOf(category)].name = category.name;
     categories[categories.indexOf(category)].tasks = category.tasks;
   }
 
-  updateTask (task: ITask){
+  updateTask(task: ITask) {
     tasks[tasks.indexOf(task)].name = task.name;
     tasks[tasks.indexOf(task)].status = task.status;
   }
@@ -48,13 +47,13 @@ export class ListService {
     });
   }
 
-  addTask(name: string, categoryID: string, order:number) {
+  addTask(name: string, categoryID: string, order: number) {
     const newTask: ITask = {
       name,
       status: false,
       id: uuidv4(),
       categoryID: categoryID,
-      order
+      order,
     };
     tasks.push(newTask);
 
@@ -64,8 +63,13 @@ export class ListService {
   deleteTask(task: ITask) {
     tasks.splice(tasks.indexOf(task), 1);
 
-    const taskCategory = categories.find(category => category.id === task.categoryID);
-    taskCategory?.tasks?.splice(taskCategory.tasks.indexOf(task.categoryID!),1);
+    const taskCategory = categories.find(
+      (category) => category.id === task.categoryID,
+    );
+    taskCategory?.tasks?.splice(
+      taskCategory.tasks.indexOf(task.categoryID!),
+      1,
+    );
   }
 
   constructor() {}
