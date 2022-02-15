@@ -59,7 +59,9 @@ export class ListComponent implements OnInit {
   }
 
   onKeypress(keyboardEvent: KeyboardEvent) {
-    if (keyboardEvent.key === Key.Enter) this.addTask();
+    if (keyboardEvent.key === Key.Enter) {
+      this.addTask();
+    }
   }
 
   getDoneTasks(): ITask[] {
@@ -81,9 +83,13 @@ export class ListComponent implements OnInit {
       this.tasks = this.listService
         .getTasks(this.category)
         .sort((taskA, taskB) => {
-          if (taskA.order! > taskB.order!) return 1;
+          if (taskA.order! > taskB.order!) {
+            return 1;
+          }
 
-          if (taskA.order! < taskB.order!) return -1;
+          if (taskA.order! < taskB.order!) {
+            return -1;
+          }
 
           return 0;
         });
