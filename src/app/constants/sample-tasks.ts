@@ -1,6 +1,6 @@
-import { Task } from 'src/app/classes/task';
+import { ITask } from 'src/app/models/task';
 
-export const sampleTasks: Task[] = [
+export const sampleTasks: ITask[] = [
   {
     name: 'Do a backflip',
     status: false,

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Task } from 'src/app/classes/task';
+import { ITask } from 'src/app/models/task';
 import { sampleTasks as tasks } from '../constants/sample-tasks';
 import { sampleCategories as categories } from '../constants/sample-categories';
-import { Category } from 'src/app/classes/category';
+import { ICategory } from 'src/app/models/category';
 import { v4 as uuidv4 } from 'uuid';
-import { ITask } from 'src/models/task';
+
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class ListService {
     return categories;
   }
 
-  deleteCategory(category: Category) {
+  deleteCategory(category: ICategory) {
     categories.splice(categories.indexOf(category), 1);
     const tasksToRemove = tasks.filter(
       (task) => task.categoryID === category.id,
@@ -28,12 +28,12 @@ export class ListService {
     });
   }
 
-  updateCategory (category: Category){
+  updateCategory (category: ICategory){
     categories[categories.indexOf(category)].name = category.name;
     categories[categories.indexOf(category)].tasks = category.tasks;
   }
 
-  updateTask (task: Task){
+  updateTask (task: ITask){
     tasks[tasks.indexOf(task)].name = task.name;
     tasks[tasks.indexOf(task)].status = task.status;
   }
@@ -42,14 +42,14 @@ export class ListService {
     categories.push({ name, id: uuidv4() });
   }
 
-  getTasks(category: Category) {
+  getTasks(category: ICategory) {
     return tasks.filter((task) => {
       return task.categoryID === category.id;
     });
   }
 
   addTask(name: string, categoryID: string, order:number) {
-    const newTask: Task = {
+    const newTask: ITask = {
       name,
       status: false,
       id: uuidv4(),
@@ -61,11 +61,11 @@ export class ListService {
     return newTask;
   }
 
-  deleteTask(task: Task) {
+  deleteTask(task: ITask) {
     tasks.splice(tasks.indexOf(task), 1);
 
     const taskCategory = categories.find(category => category.id === task.categoryID);
-    taskCategory?.tasks?.splice(taskCategory.tasks.indexOf(task.categoryID),1);
+    taskCategory?.tasks?.splice(taskCategory.tasks.indexOf(task.categoryID!),1);
   }
 
   constructor() {}

@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Category } from 'src/app/classes/category';
+import { ICategory } from 'src/app/models/category';
 
 @Component({
   selector: 'app-category',
@@ -9,9 +9,9 @@ import { Category } from 'src/app/classes/category';
 export class CategoryComponent implements OnInit {
   constructor() {}
 
-  @Input() category: Category = { name: '', id: '0' };
-  @Output() deleteCategory = new EventEmitter<Category>();
-  @Output() renameCategory = new EventEmitter<Category>();
+  @Input() category: ICategory = { name: '', id: '0' };
+  @Output() deleteCategory = new EventEmitter<ICategory>();
+  @Output() renameCategory = new EventEmitter<ICategory>();
 
   delete() {
     this.deleteCategory.emit(this.category);

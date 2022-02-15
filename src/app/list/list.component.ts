@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from '../list-service/list-service';
-import { Category } from 'src/app/classes/category';
-import { Task } from 'src/app/classes/task';
+import { ICategory } from 'src/app/models/category';
+import { ITask } from 'src/app/models/task';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
@@ -14,13 +14,13 @@ import { Key } from '../constants/keyboard-keys';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  @Input() category!: Category;
+  @Input() category!: ICategory;
 
   @ViewChild(FormGroupDirective, { static: false })
   formDirective!: FormGroupDirective;
 
   requriedFormControl = new FormControl('', [Validators.required]);
-  tasks: Task[] = [];
+  tasks: ITask[] = [];
   newTaskName: string = '';
   showError: boolean = true;
 
@@ -52,7 +52,7 @@ export class ListComponent implements OnInit {
     this.requriedFormControl.markAsUntouched();
   }
 
-  deleteTask(task: Task) {
+  deleteTask(task: ITask) {
     this.listService.deleteTask(task);
     this.tasks.splice(this.tasks.indexOf(task), 1);
   }
@@ -61,11 +61,11 @@ export class ListComponent implements OnInit {
     if (keyboardEvent.key === Key.Enter) this.addTask();
   }
 
-  getDoneTasks(): Task[] {
+  getDoneTasks(): ITask[] {
     return this.tasks.filter((task) => task.status);
   }
 
-  dropTasks(event: CdkDragDrop<Task[]>) {
+  dropTasks(event: CdkDragDrop<ITask[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
     let i = 0;
     event.container.data.forEach((task) => {
@@ -80,22 +80,22 @@ export class ListComponent implements OnInit {
       this.tasks = this.listService
         .getTasks(this.category)
         .sort((taskA, taskB) => {
-          if (taskA.order > taskB.order) return 1;
+          if (taskA.order! > taskB.order!) return 1;
 
-          if (taskA.order < taskB.order) return -1;
+          if (taskA.order! < taskB.order!) return -1;
 
           return 0;
         });
     }
   }
 
-  updateTaskStatus(task: Task) {
+  updateTaskStatus(task: ITask) {
     this.tasks.find((taskElement) => taskElement.id === task.id)!.status =
       task.status;
     this.listService.updateTask(task);
   }
 
-  renameTask(task: Task) {
+  renameTask(task: ITask) {
     this.tasks.find((taskElement) => taskElement.id === task.id)!.name =
       task.name;
     this.listService.updateTask(task);

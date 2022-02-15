@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/classes/category';
+import { ICategory } from 'src/app/models/category';
 import { ListService } from '../list-service/list-service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ListService } from '../list-service/list-service';
 export class DashboardComponent implements OnInit {
   constructor(private listService: ListService) {}
 
-  categories?: Category[];
+  categories?: ICategory[];
 
   addCategory(name: string) {
     this.listService.addCategory(name);
@@ -18,12 +18,12 @@ export class DashboardComponent implements OnInit {
     this.updateCategories();
   }
 
-  deleteCategory(category: Category) {
+  deleteCategory(category: ICategory) {
     this.listService.deleteCategory(category);
     this.updateCategories();
   }
 
-  updateCategory(category: Category) {
+  updateCategory(category: ICategory) {
     this.listService.updateCategory(category);
   }
 
