@@ -3,7 +3,7 @@
   <mat-icon>add</mat-icon>
 </button>
 <div class="categories-holder" *ngIf="categories">
-  <div class="category" *ngFor="let category of categories.slice().reverse()">
+  <div class="category" *ngFor="let category of categories">
     <app-category
       (deleteCategory)="deleteCategory($event)"
       (renameCategory)="updateCategory($event)"

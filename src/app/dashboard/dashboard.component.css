@@ -3,6 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+  flex-direction: row-reverse;
 }
 .category {
   display: flex;
