@@ -29,6 +29,7 @@ export class ListComponent implements OnInit {
   constructor(public listService: ListService) {
     this.listForm = new FormGroup({});
   }
+  
   addTask() {
     if (this.requriedFormControl.errors) {
       this.showError = true;
