@@ -33,17 +33,17 @@ export class ListComponent implements OnInit {
   addTask() {
     if (this.requriedFormControl.errors) {
       this.showError = true;
-      return;
-    }
-    const newTask = this.listService.addTask(
-      this.newTaskName,
-      this.category.id,
-      this.tasks.length
-    );
-    this.tasks.push(newTask);
+    } else {
+      const newTask = this.listService.addTask(
+        this.newTaskName,
+        this.category.id,
+        this.tasks.length
+      );
+      this.tasks.push(newTask);
 
-    this.newTaskName = '';
-    this.resetValidator();
+      this.newTaskName = '';
+      this.resetValidator();
+    }
   }
 
   resetValidator() {
