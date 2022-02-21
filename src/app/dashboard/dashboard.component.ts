@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateCategory(category: ICategory) {
-    this.listService.updateCategory(category);
+    this.categoryService.updateCategory(category);
   }
 
   updateCategories() {

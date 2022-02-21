@@ -25,6 +25,11 @@ export class CategoryService {
     });
   }
 
+  updateCategory(category: ICategory) {
+    categories[categories.indexOf(category)].name = category.name;
+    categories[categories.indexOf(category)].tasks = category.tasks;
+  }
+
   addCategory(name: string) {
     categories.push({ name, id: uuidv4() });
   }

@@ -12,11 +12,6 @@ export class ListService {
   // tasks: Task[] = sampleTasks;
   // categories: Category[] = sampleCategories;
 
-  updateCategory(category: ICategory) {
-    categories[categories.indexOf(category)].name = category.name;
-    categories[categories.indexOf(category)].tasks = category.tasks;
-  }
-
   updateTask(task: ITask) {
     tasks[tasks.indexOf(task)].name = task.name;
     tasks[tasks.indexOf(task)].status = task.status;
