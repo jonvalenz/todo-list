@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITask } from 'src/app/core/interfaces/task';
-import { ListService } from 'src/app/core/services/list-service/list-service';
+import { TaskService } from 'src/app/core/services/task-service/task-service';
 
 @Component({
   selector: 'app-task',
@@ -8,7 +8,7 @@ import { ListService } from 'src/app/core/services/list-service/list-service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
-  constructor(private listService: ListService) {}
+  constructor(private taskService: TaskService) {}
 
   @Input() task: ITask = {};
   @Output() deleteTask = new EventEmitter<ITask>();

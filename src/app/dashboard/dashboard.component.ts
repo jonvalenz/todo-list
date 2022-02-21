@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/core/interfaces/category';
-import { ListService } from '../core/services/list-service/list-service';
+import { TaskService } from '../core/services/task-service/task-service';
 import { CategoryService } from '../core/services/category-service/category.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CategoryService } from '../core/services/category-service/category.serv
 })
 export class DashboardComponent implements OnInit {
   constructor(
-    private listService: ListService,
+    private taskService: TaskService,
     private categoryService: CategoryService
   ) {}
 

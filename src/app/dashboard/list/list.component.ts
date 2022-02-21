@@ -5,7 +5,7 @@ import { FormGroupDirective } from '@angular/forms';
 import { ICategory } from 'src/app/core/interfaces/category';
 import { ITask } from 'src/app/core/interfaces/task';
 import { Key } from 'src/app/core/constants/keyboard-keys';
-import { ListService } from 'src/app/core/services/list-service/list-service';
+import { TaskService } from 'src/app/core/services/task-service/task-service';
 import { ViewChild } from '@angular/core';
 
 @Component({
@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
 
   listForm: FormGroup;
 
-  constructor(public listService: ListService) {
+  constructor(public taskService: TaskService) {
     this.listForm = new FormGroup({});
   }
 
@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
     if (this.requriedFormControl.errors) {
       this.showError = true;
     } else {
-      const newTask = this.listService.addTask(
+      const newTask = this.taskService.addTask(
         this.newTaskName,
         this.category.id,
         this.tasks.length
@@ -54,7 +54,7 @@ export class ListComponent implements OnInit {
   }
 
   deleteTask(task: ITask) {
-    this.listService.deleteTask(task);
+    this.taskService.deleteTask(task);
     this.tasks.splice(this.tasks.indexOf(task), 1);
   }
 
@@ -73,13 +73,13 @@ export class ListComponent implements OnInit {
 
     event.container.data.forEach((task, index) => {
       task.order = index;
-      this.listService.updateTask(task);
+      this.taskService.updateTask(task);
     });
   }
 
   updateTaskList() {
     if (this.category != undefined) {
-      this.tasks = this.listService
+      this.tasks = this.taskService
         .getTasks(this.category)
         .sort((taskA, taskB) => {
           if (taskA.order! > taskB.order!) {
@@ -98,13 +98,13 @@ export class ListComponent implements OnInit {
   updateTaskStatus(task: ITask) {
     this.tasks.find((taskElement) => taskElement.id === task.id)!.status =
       task.status;
-    this.listService.updateTask(task);
+    this.taskService.updateTask(task);
   }
 
   renameTask(task: ITask) {
     this.tasks.find((taskElement) => taskElement.id === task.id)!.name =
       task.name;
-    this.listService.updateTask(task);
+    this.taskService.updateTask(task);
   }
 
   ngOnInit(): void {
