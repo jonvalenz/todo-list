@@ -4,8 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormGroupDirective } from '@angular/forms';
 import { ICategory } from 'src/app/core/interfaces/category';
 import { ITask } from 'src/app/core/interfaces/task';
-import { Key } from '../constants/keyboard-keys';
-import { ListService } from '../services/list-service/list-service';
+import { Key } from 'src/app/core/constants/keyboard-keys';
+import { ListService } from 'src/app/core/services/list-service/list-service';
 import { ViewChild } from '@angular/core';
 
 @Component({
