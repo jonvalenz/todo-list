@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
 
   requriedFormControl = new FormControl('', [Validators.required]);
   tasks: ITask[] = [];
-  newTaskName = '';
+
   showError = true;
 
   listForm: FormGroup;
@@ -35,13 +35,13 @@ export class ListComponent implements OnInit {
       this.showError = true;
     } else {
       const newTask = this.taskService.addTask(
-        this.newTaskName,
+        this.requriedFormControl.value,
         this.category.id,
         this.tasks.length
       );
       this.tasks.push(newTask);
 
-      this.newTaskName = '';
+      this.requriedFormControl.reset();
       this.resetValidator();
     }
   }

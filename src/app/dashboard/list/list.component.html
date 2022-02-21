@@ -20,7 +20,6 @@
       [formControl]="requriedFormControl"
       (keydown)="onKeypress($event)"
       placeholder="Add a task!"
-      [(ngModel)]="newTaskName"
       (focusout)="resetValidator()"
     />
     <mat-error *ngIf="showError">
