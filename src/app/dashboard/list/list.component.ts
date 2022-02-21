@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
   @ViewChild(FormGroupDirective, { static: false })
   formDirective!: FormGroupDirective;
 
-  requriedFormControl = new FormControl('', [Validators.required]);
+  taskName = new FormControl('', [Validators.required]);
   tasks: ITask[] = [];
 
   showError = true;
@@ -31,17 +31,17 @@ export class ListComponent implements OnInit {
   }
 
   addTask() {
-    if (this.requriedFormControl.errors) {
+    if (this.taskName.errors) {
       this.showError = true;
     } else {
       const newTask = this.taskService.addTask(
-        this.requriedFormControl.value,
+        this.taskName.value,
         this.category.id,
         this.tasks.length
       );
       this.tasks.push(newTask);
 
-      this.requriedFormControl.reset();
+      this.taskName.reset();
       this.resetValidator();
     }
   }
@@ -49,8 +49,8 @@ export class ListComponent implements OnInit {
   resetValidator() {
     this.showError = false;
     this.formDirective.resetForm();
-    this.requriedFormControl.markAsPristine();
-    this.requriedFormControl.markAsUntouched();
+    this.taskName.markAsPristine();
+    this.taskName.markAsUntouched();
   }
 
   deleteTask(task: ITask) {
