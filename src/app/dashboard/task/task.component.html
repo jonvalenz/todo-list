@@ -4,14 +4,14 @@
       (change)="toggle()"
       class="task-checkbox"
       matPrefix
-      formControlName="statusControl"
+      formControlName="status"
     >
     </mat-checkbox>
     <input
       class="task-item"
       [class.done-task-item]="task.status"
       matInput
-      formControlName="nameControl"
+      formControlName="name"
       (focusout)="rename()"
     />
     <button mat-icon-button matSuffix (click)="delete()">

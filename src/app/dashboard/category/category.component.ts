@@ -13,7 +13,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.name = this.category.name!;
   }
-  categoryControl = this.fb.control('');
+  categoryName = this.fb.control('');
 
   @Input() category: ICategory = { name: '', id: '0' };
   @Output() deleteCategory = new EventEmitter<ICategory>();
@@ -28,10 +28,10 @@ export class CategoryComponent implements OnInit {
   }
 
   get name() {
-    return this.categoryControl?.value;
+    return this.categoryName?.value;
   }
 
   set name(value: string) {
-    this.categoryControl?.setValue(value);
+    this.categoryName?.setValue(value);
   }
 }

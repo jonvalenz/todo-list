@@ -13,11 +13,11 @@
     ></app-task>
   </mat-list-item>
 </mat-list>
-<form [formGroup]="taskNameGroup">
+<form [formGroup]="taskForm">
   <mat-form-field class="new-task-field">
     <input
       matInput
-      formControlName="taskNameControl"
+      formControlName="taskName"
       (keydown)="onKeypress($event)"
       placeholder="Add a task!"
       (focusout)="resetValidator()"

@@ -12,8 +12,8 @@ export class TaskComponent implements OnInit {
   constructor(private taskService: TaskService, private fb: FormBuilder) {}
 
   taskForm: FormGroup = this.fb.group({
-    nameControl: ['', Validators.required],
-    statusControl: [Boolean]
+    name: ['', Validators.required],
+    status: [Boolean]
   });
 
   @Input() task: ITask = {};
@@ -22,8 +22,8 @@ export class TaskComponent implements OnInit {
   @Output() renameTask = new EventEmitter<ITask>();
 
   ngOnInit(): void {
-    this.taskForm.get('nameControl')!.setValue(this.task.name);
-    this.taskForm.get('statusControl')!.setValue(this.task.status);
+    this.taskForm.get('name')!.setValue(this.task.name);
+    this.taskForm.get('status')!.setValue(this.task.status);
   }
 
   delete() {
@@ -52,18 +52,18 @@ export class TaskComponent implements OnInit {
     return this.task.id;
   }
 
-  get nameControl() {
-    return this.taskForm.get('nameControl');
+  get _name() {
+    return this.taskForm.get('name');
   }
 
-  get statusControl() {
-    return this.taskForm.get('statusControl');
+  get _status() {
+    return this.taskForm.get('status');
   }
   get name() {
-    return this.nameControl?.value;
+    return this._name?.value;
   }
 
   get status() {
-    return this.statusControl?.value;
+    return this._status?.value;
   }
 }

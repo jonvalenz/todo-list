@@ -15,8 +15,8 @@ import { FormBuilder } from '@angular/forms';
 export class ListComponent implements OnInit {
   @Input() category!: ICategory;
 
-  taskNameGroup = this.fb.group({
-    taskNameControl: ['', Validators.required]
+  taskForm = this.fb.group({
+    taskName: ['', Validators.required]
   });
 
   tasks: ITask[] = [];
@@ -25,7 +25,7 @@ export class ListComponent implements OnInit {
   constructor(public taskService: TaskService, private fb: FormBuilder) {}
 
   addTask() {
-    if (this.taskNameControl.errors) {
+    if (this._taskName.errors) {
       this.showError = true;
     } else {
       const newTask = this.taskService.addTask(
@@ -35,7 +35,7 @@ export class ListComponent implements OnInit {
       );
       this.tasks.push(newTask);
 
-      this.taskNameGroup.reset();
+      this.taskForm.reset();
     }
   }
 
@@ -101,14 +101,14 @@ export class ListComponent implements OnInit {
     this.updateTaskList();
   }
 
-  get taskNameControl() {
-    return this.taskNameGroup.get('taskNameControl')!;
+  get _taskName() {
+    return this.taskForm.get('taskName')!;
   }
 
   get taskName() {
-    return this.taskNameControl?.value;
+    return this._taskName?.value;
   }
   set taskName(value: string) {
-    this.taskNameControl?.setValue(value);
+    this._taskName?.setValue(value);
   }
 }
