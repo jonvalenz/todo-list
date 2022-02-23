@@ -1,0 +1,12 @@
+.category-name {
+  text-align: left;
+  padding: 0.2em 0 0.2em 0.2em;
+}
+
+.category-content {
+  margin-left: 1em;
+}
+
+.category-name:hover {
+  background-color: rgb(230, 230, 230);
+}

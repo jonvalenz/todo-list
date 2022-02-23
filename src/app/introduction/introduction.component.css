@@ -1,0 +1,12 @@
+.intro-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  height: 100%;
+}
+
+.intro-info {
+  padding: 5em;
+}

@@ -1,0 +1,13 @@
+.task-checkbox {
+  margin-right: 0.2em;
+  padding-bottom: 0.1em;
+}
+
+.task-item {
+  margin-bottom: -0.15em;
+}
+
+.done-task-item {
+  text-decoration: line-through;
+  color: rgb(211, 211, 211);
+}

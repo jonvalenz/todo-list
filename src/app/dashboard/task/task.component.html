@@ -1,0 +1,21 @@
+<div *ngIf="task">
+  <mat-form-field [formGroup]="taskForm">
+    <mat-checkbox
+      (change)="toggle()"
+      class="task-checkbox"
+      matPrefix
+      formControlName="status"
+    >
+    </mat-checkbox>
+    <input
+      class="task-item"
+      [class.done-task-item]="task.status"
+      matInput
+      formControlName="name"
+      (focusout)="rename()"
+    />
+    <button mat-icon-button matSuffix (click)="delete()">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </mat-form-field>
+</div>

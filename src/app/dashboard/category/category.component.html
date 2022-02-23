@@ -1,0 +1,27 @@
+<div *ngIf="category">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <input
+          class="category-name"
+          matInput
+          placeholder="New Category"
+          [formControl]="categoryName"
+          fullwidth
+          (focusout)="rename()"
+        />
+      </mat-card-title>
+    </mat-card-header>
+    <div class="category-content">
+      <mat-card-content>
+        <app-list [category]="category"></app-list>
+      </mat-card-content>
+    </div>
+
+    <mat-card-actions align="end">
+      <button mat-icon-button matSuffix (click)="delete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

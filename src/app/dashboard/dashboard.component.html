@@ -1,0 +1,13 @@
+<button mat-button class="new-category-button" (click)="addCategory('')">
+  <div>New Category</div>
+  <mat-icon>add</mat-icon>
+</button>
+<div class="categories-holder" *ngIf="categories">
+  <div class="category" *ngFor="let category of categories">
+    <app-category
+      (deleteCategory)="deleteCategory($event)"
+      (renameCategory)="updateCategory($event)"
+      [category]="category"
+    ></app-category>
+  </div>
+</div>

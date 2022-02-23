@@ -1,0 +1,32 @@
+<mat-list
+  cdkDropList
+  (cdkDropListDropped)="dropTasks($event)"
+  [cdkDropListData]="tasks"
+  class="task-list"
+>
+  <mat-list-item class="task-list-item" *ngFor="let task of tasks" cdkDrag>
+    <app-task
+      (toggleTask)="updateTaskStatus($event)"
+      (deleteTask)="deleteTask($event)"
+      (renameTask)="renameTask($event)"
+      [task]="task"
+    ></app-task>
+  </mat-list-item>
+</mat-list>
+<form [formGroup]="taskForm">
+  <mat-form-field class="new-task-field">
+    <input
+      matInput
+      formControlName="taskName"
+      (keydown)="onKeypress($event)"
+      placeholder="Add a task!"
+      (focusout)="resetValidator()"
+    />
+    <mat-error *ngIf="showError">
+      Task name is <strong>required</strong>
+    </mat-error>
+    <button mat-button type="submit" matSuffix (click)="addTask()">
+      <mat-icon>note_add</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
