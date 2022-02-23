@@ -15,7 +15,10 @@ export class CategoryService {
   }
 
   deleteCategory(category: ICategory) {
-    categories.splice(categories.indexOf(category), 1);
+    categories.splice(
+      categories.findIndex((categoryQuery) => category.id === categoryQuery.id),
+      1
+    );
     const tasksToRemove = tasks.filter(
       (task) => task.categoryID === category.id
     );
@@ -26,8 +29,12 @@ export class CategoryService {
   }
 
   updateCategory(category: ICategory) {
-    categories[categories.indexOf(category)].name = category.name;
-    categories[categories.indexOf(category)].tasks = category.tasks;
+    categories[
+      categories.findIndex((categoryQuery) => category.id === categoryQuery.id)
+    ].name = category.name;
+    categories[
+      categories.findIndex((categoryQuery) => category.id === categoryQuery.id)
+    ].tasks = category.tasks;
   }
 
   addCategory(name: string) {

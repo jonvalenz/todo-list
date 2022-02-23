@@ -13,8 +13,12 @@ export class TaskService {
   // categories: Category[] = sampleCategories;
 
   updateTask(task: ITask) {
-    tasks[tasks.indexOf(task)].name = task.name;
-    tasks[tasks.indexOf(task)].status = task.status;
+    console.log(task);
+    console.log(tasks);
+    tasks[tasks.findIndex((taskQuery) => task.id === taskQuery.id)].name =
+      task.name;
+    tasks[tasks.findIndex((taskQuery) => task.id === taskQuery.id)].status =
+      task.status;
   }
 
   getTasks(category: ICategory) {
@@ -37,7 +41,10 @@ export class TaskService {
   }
 
   deleteTask(task: ITask) {
-    tasks.splice(tasks.indexOf(task), 1);
+    tasks.splice(
+      tasks.findIndex((taskQuery) => task.id === taskQuery.id),
+      1
+    );
 
     const taskCategory = categories.find(
       (category) => category.id === task.categoryID
