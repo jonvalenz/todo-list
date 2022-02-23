@@ -13,11 +13,11 @@
     ></app-task>
   </mat-list-item>
 </mat-list>
-<form [formGroup]="listForm" #formDirective="ngForm">
+<form [formGroup]="taskNameGroup">
   <mat-form-field class="new-task-field">
     <input
       matInput
-      [formControl]="taskName"
+      formControlName="taskNameControl"
       (keydown)="onKeypress($event)"
       placeholder="Add a task!"
       (focusout)="resetValidator()"
@@ -25,7 +25,7 @@
     <mat-error *ngIf="showError">
       Task name is <strong>required</strong>
     </mat-error>
-    <button mat-icon-button matSuffix (click)="addTask()">
+    <button mat-button type="submit" matSuffix (click)="addTask()">
       <mat-icon>note_add</mat-icon>
     </button>
   </mat-form-field>

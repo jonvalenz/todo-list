@@ -6,7 +6,7 @@
           class="category-name"
           matInput
           placeholder="New Category"
-          [(ngModel)]="category.name"
+          [formControl]="categoryControl"
           fullwidth
           (focusout)="rename()"
         />

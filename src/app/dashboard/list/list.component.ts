@@ -1,12 +1,13 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { FormGroupDirective } from '@angular/forms';
 import { ICategory } from 'src/app/core/interfaces/category';
 import { ITask } from 'src/app/core/interfaces/task';
 import { Key } from 'src/app/core/constants/keyboard-keys';
 import { TaskService } from 'src/app/core/services/task-service/task-service';
 import { ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -16,41 +17,32 @@ import { ViewChild } from '@angular/core';
 export class ListComponent implements OnInit {
   @Input() category!: ICategory;
 
-  @ViewChild(FormGroupDirective, { static: false })
-  formDirective!: FormGroupDirective;
+  taskNameGroup = this.fb.group({
+    taskNameControl: ['', Validators.required]
+  });
 
-  taskName = new FormControl('', [Validators.required]);
   tasks: ITask[] = [];
-
   showError = true;
 
-  listForm: FormGroup;
-
-  constructor(public taskService: TaskService) {
-    this.listForm = new FormGroup({});
-  }
+  constructor(public taskService: TaskService, private fb: FormBuilder) {}
 
   addTask() {
-    if (this.taskName.errors) {
+    if (this.taskNameControl.errors) {
       this.showError = true;
     } else {
       const newTask = this.taskService.addTask(
-        this.taskName.value,
+        this.taskName,
         this.category.id,
         this.tasks.length
       );
       this.tasks.push(newTask);
 
-      this.taskName.reset();
-      this.resetValidator();
+      this.taskNameGroup.reset();
     }
   }
 
   resetValidator() {
     this.showError = false;
-    this.formDirective.resetForm();
-    this.taskName.markAsPristine();
-    this.taskName.markAsUntouched();
   }
 
   deleteTask(task: ITask) {
@@ -109,5 +101,16 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateTaskList();
+  }
+
+  get taskNameControl() {
+    return this.taskNameGroup.get('taskNameControl')!;
+  }
+
+  get taskName() {
+    return this.taskNameControl?.value;
+  }
+  set taskName(value: string) {
+    this.taskNameControl?.setValue(value);
   }
 }

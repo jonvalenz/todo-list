@@ -13,8 +13,6 @@ export class TaskService {
   // categories: Category[] = sampleCategories;
 
   updateTask(task: ITask) {
-    console.log(task);
-    console.log(tasks);
     tasks[tasks.findIndex((taskQuery) => task.id === taskQuery.id)].name =
       task.name;
     tasks[tasks.findIndex((taskQuery) => task.id === taskQuery.id)].status =

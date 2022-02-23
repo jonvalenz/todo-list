@@ -1,5 +1,5 @@
 export interface ICategory {
-  name: string;
+  name?: string;
   id: string;
   tasks?: string[];
 }
