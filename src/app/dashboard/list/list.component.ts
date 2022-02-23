@@ -1,12 +1,10 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { FormGroupDirective } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { ICategory } from 'src/app/core/interfaces/category';
 import { ITask } from 'src/app/core/interfaces/task';
 import { Key } from 'src/app/core/constants/keyboard-keys';
 import { TaskService } from 'src/app/core/services/task-service/task-service';
-import { ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
