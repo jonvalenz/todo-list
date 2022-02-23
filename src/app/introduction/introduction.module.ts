@@ -7,6 +7,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [IntroductionComponent],
   imports: [CommonModule, MatCardModule, RouterModule],
-  exports: [IntroductionComponent]
+  exports: []
 })
 export class IntroductionModule {}

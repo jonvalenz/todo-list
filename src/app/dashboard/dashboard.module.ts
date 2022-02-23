@@ -33,6 +33,6 @@ import { TaskComponent } from './task/task.component';
     ReactiveFormsModule,
     MatCheckboxModule
   ],
-  exports: [DashboardComponent]
+  exports: []
 })
 export class DashboardModule {}
